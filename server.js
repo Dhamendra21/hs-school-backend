@@ -19,7 +19,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    process.env.CLIENT_URL,
+    'https://school.harishankargroup.com',
+  ],
   credentials: true
 }));
 app.use(express.json({ limit: '200kb' }));
@@ -55,7 +58,7 @@ app.use((err, req, res, next) => {
 });
 
 connectDB()
-  .then( () => {
+  .then(() => {
     app.listen(PORT, () => {
       console.log('');
       console.log('========================================');
